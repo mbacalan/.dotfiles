@@ -21,6 +21,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'junegunn/gv.vim'
 Plug 'dense-analysis/ale'
 Plug 'pangloss/vim-javascript'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -28,6 +29,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
+
 colorscheme dracula
 
 let mapleader = " "
