@@ -118,4 +118,5 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(starship init zsh)"
 
-export EDITOR="nvim"
+source $HOME/.zsh_profile
+
