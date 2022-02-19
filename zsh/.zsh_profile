@@ -5,3 +5,4 @@ export SUDO=EDITOR=$VIM
 export GIT_EDITOR=$VIM
 export DOTFILES=$HOME/.dotfiles
 
+alias vim=$VIM
