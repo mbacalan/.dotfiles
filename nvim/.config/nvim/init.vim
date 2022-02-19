@@ -8,46 +8,44 @@ set smartindent
 set updatetime=500
 set noshowmode
 set list
+set termguicolors
 
 let g:ale_disable_lsp = 1
 
-call plug#begin('~/local/share/nvim/site/pack/*/start')
+call plug#begin('~/.vim/plugged')
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline'
+Plug 'junegunn/gv.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'junegunn/gv.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'
-Plug 'pangloss/vim-javascript'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-" I think coc and treesitter are kinda conflicting?
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
 colorscheme dracula
 
 let mapleader = " "
-" nnoremap <leader>pv :Vex<CR>
 nnoremap <C-p> :GFiles<CR>
+nnoremap <C-l> :Files<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
 " toggle highlighting after search
 nmap <leader>h :noh<CR>
-
-let g:lightline = {
-    \ 'colorscheme': 'one',
-    \ }
 
 let g:ale_fixers = ['eslint']
 let g:ale_fix_on_save = 1
 let g:ale_linters = { 'javascript': ['eslint'], 'typescript': ['eslint', 'tsserver'] }
 
+let g:airline_theme='dracula'
 " this shit is supposed to be disabled by default but somehow its not?
 let g:airline#extensions#tabline#enabled = 0
 
@@ -102,3 +100,4 @@ nmap <leader>rn <Plug>(coc-rename)
 " NERD Commenter
 filetype plugin on
 let g:NERDCreateDefaultMappings = 1
+let g:NERDSpaceDelims = 1
