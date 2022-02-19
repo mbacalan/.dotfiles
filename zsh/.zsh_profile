@@ -6,3 +6,6 @@ export GIT_EDITOR=$VIM
 export DOTFILES=$HOME/.dotfiles
 
 alias vim=$VIM
+
+bindkey -s ^f "~/.local/bin/tmux-sessionizer\n"
+
