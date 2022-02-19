@@ -75,6 +75,9 @@ else
   set signcolumn=yes
 endif
 
+" Use <cr> to confirm completion
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
