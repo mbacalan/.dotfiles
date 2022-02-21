@@ -5,7 +5,7 @@ set tabstop=2 softtabstop=2
 set shiftwidth=2
 set expandtab
 set smartindent
-set updatetime=500
+set updatetime=300
 set noshowmode
 set list
 set termguicolors
