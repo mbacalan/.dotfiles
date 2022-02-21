@@ -12,5 +12,5 @@ alias vim=$VIM
 
 bindkey -s ^f "~/.local/bin/tmux-sessionizer\n"
 
-source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/fzf/key-bindings.zsh
 
