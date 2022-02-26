@@ -9,8 +9,12 @@ set updatetime=300
 set noshowmode
 set list
 set termguicolors
+"
+set wildmode=longest,list,full
+set wildmenu
 
-let g:ale_disable_lsp = 1
+set wildignore+=**/node_modules/*
+set wildignore+=**/.git/*
 
 call plug#begin('~/.vim/plugged')
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -21,10 +25,9 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'dense-analysis/ale'
+Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -40,10 +43,6 @@ nnoremap <C-f> :NERDTreeFind<CR>
 
 " toggle highlighting after search
 nmap <leader>h :noh<CR>
-
-let g:ale_fixers = ['eslint']
-let g:ale_fix_on_save = 1
-let g:ale_linters = { 'javascript': ['eslint'], 'typescript': ['eslint', 'tsserver'] }
 
 let g:airline_theme='dracula'
 " this shit is supposed to be disabled by default but somehow its not?
