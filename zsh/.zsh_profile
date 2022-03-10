@@ -11,3 +11,16 @@ bindkey -s ^f "~/.local/bin/tmux-sessionizer\n"
 
 source /usr/share/fzf/key-bindings.zsh
 
+alias venvactivate="source ~/work/venv/bin/activate"
+alias ccache="./manage.py clear_cache"
+
+runserver() {
+  source ~/work/venv/bin/activate
+
+  if [ -n "$1" ]
+  then
+    python manage.py runserver 0:$1
+  else
+    python manage.py runserver 0:8083
+  fi
+}
