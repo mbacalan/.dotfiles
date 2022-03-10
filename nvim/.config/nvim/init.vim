@@ -19,6 +19,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'ThePrimeagen/harpoon'
 Plug 'junegunn/gv.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
@@ -104,3 +105,7 @@ nmap <leader>rn <Plug>(coc-rename)
 filetype plugin on
 let g:NERDCreateDefaultMappings = 1
 let g:NERDSpaceDelims = 1
+
+" Harpoon
+nnoremap <silent><leader>a :lua  require("harpoon.mark").add_file()<CR>
+nnoremap <silent><C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
