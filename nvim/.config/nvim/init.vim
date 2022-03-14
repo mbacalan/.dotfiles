@@ -9,13 +9,15 @@ set updatetime=300
 set noshowmode
 set list
 set termguicolors
+set hidden
+set incsearch
+set nohlsearch
 set wildmode=longest,list,full
 set wildmenu
 set wildignore+=**/node_modules/*
 set wildignore+=**/.git/*
 
 call plug#begin('~/.vim/plugged')
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -29,23 +31,17 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'nvim-lualine/lualine.nvim'
 call plug#end()
 
 lua require("lsp")
 lua require("treesitter")
 lua require("statusline")
+
 colorscheme dracula
 
 let mapleader = " "
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-
-" toggle highlighting after search
-nmap <leader>h :noh<CR>
 
 " Telescope
 lua require('telescope').load_extension('fzf')
@@ -53,6 +49,9 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fgi <cmd>Telescope git_files<cr>
 
+" NERD Tree
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 " NERD Commenter
 filetype plugin on
@@ -60,5 +59,5 @@ let g:NERDCreateDefaultMappings = 1
 let g:NERDSpaceDelims = 1
 
 " Harpoon
-nnoremap <silent><leader>a :lua  require("harpoon.mark").add_file()<CR>
+nnoremap <silent><leader>a :lua require("harpoon.mark").add_file()<CR>
 nnoremap <silent><C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
