@@ -18,6 +18,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -36,6 +37,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
 lua require("lsp")
+lua require("treesitter")
 colorscheme dracula
 
 let mapleader = " "
