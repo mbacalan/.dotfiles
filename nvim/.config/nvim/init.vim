@@ -28,16 +28,16 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'nvim-lualine/lualine.nvim'
 call plug#end()
 
 lua require("lsp")
 lua require("treesitter")
+lua require("statusline")
 colorscheme dracula
 
 let mapleader = " "
@@ -52,11 +52,6 @@ lua require('telescope').load_extension('fzf')
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fgi <cmd>Telescope git_files<cr>
-
-let g:airline_theme='dracula'
-" this shit is supposed to be disabled by default but somehow its not?
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#scrollbar#enabled = 0
 
 
 " NERD Commenter
