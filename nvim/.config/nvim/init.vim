@@ -16,6 +16,7 @@ set wildmode=longest,list,full
 set wildmenu
 set wildignore+=**/node_modules/*
 set wildignore+=**/.git/*
+set clipboard+=unnamedplus
 
 call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
