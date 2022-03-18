@@ -17,6 +17,8 @@ set wildmenu
 set wildignore+=**/node_modules/*
 set wildignore+=**/.git/*
 set clipboard+=unnamedplus
+" new global statusline
+set laststatus=3
 
 call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
