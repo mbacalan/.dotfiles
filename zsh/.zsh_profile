@@ -5,15 +5,14 @@ export SUDO=EDITOR=$VIM
 export GIT_EDITOR=$VIM
 export DOTFILES=$HOME/.dotfiles
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-alias vim=$VIM
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 bindkey -s ^f "~/.local/bin/tmux-sessionizer\n"
 
 source /usr/share/fzf/key-bindings.zsh
 
+alias vim=$VIM
 alias venvactivate="source ~/work/venv/bin/activate"
 alias ccache="./manage.py clear_cache"
 
