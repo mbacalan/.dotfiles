@@ -4,7 +4,7 @@
 [pull]
   rebase = false
 [core]
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = diff-so-fancy | less --tabs=4 -RF
 [interactive]
   diffFilter = diff-so-fancy --patch
 [help]
