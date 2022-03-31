@@ -21,6 +21,7 @@ set clipboard+=unnamedplus
 set laststatus=3
 
 call plug#begin('~/.vim/plugged')
+Plug 'github/copilot.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/nvim-cmp'
@@ -70,3 +71,6 @@ let g:NERDSpaceDelims = 1
 " Harpoon
 nnoremap <silent><leader>a :lua require("harpoon.mark").add_file()<CR>
 nnoremap <silent><C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
