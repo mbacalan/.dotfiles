@@ -1,6 +1,6 @@
 require('lualine').setup {
   options = {
     theme = 'dracula',
-    icons_enabled = false
+    icons_enabled = true
   }
 }
