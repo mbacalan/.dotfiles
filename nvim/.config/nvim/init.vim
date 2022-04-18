@@ -1,20 +1,19 @@
 syntax on
+set ma
+set mouse=a
 set scrolloff=8
 set number
 set relativenumber
-set tabstop=2 softtabstop=2
+set tabstop=2
+set softtabstop=2
 set shiftwidth=2
 set expandtab
 set smartindent
 set updatetime=300
-set noshowmode
 set list
 set termguicolors
-set hidden
-set incsearch
 set nohlsearch
 set wildmode=longest,list,full
-set wildmenu
 set wildignore+=**/node_modules/*
 set wildignore+=**/.git/*
 set clipboard+=unnamedplus
