@@ -59,7 +59,7 @@ let mapleader = " "
 lua require('telescope').load_extension('fzf')
 nnoremap <leader>ff <cmd>Telescope find_files hidden=true no_ignore=false<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fgi <cmd>Telescope git_files<cr>
+nnoremap <leader>fG <cmd>Telescope git_files<cr>
 
 " NERD Tree
 let g:NERDTreeShowHidden = 1
