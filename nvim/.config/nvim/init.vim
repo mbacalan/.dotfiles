@@ -41,7 +41,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'nvim-lualine/lualine.nvim'
 call plug#end()
@@ -49,6 +49,7 @@ call plug#end()
 lua require("lsp")
 lua require("treesitter")
 lua require("statusline")
+lua require('gitsigns').setup()
 
 colorscheme dracula
 
