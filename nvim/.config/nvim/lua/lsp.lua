@@ -1,22 +1,10 @@
-require("nvim-lsp-installer").setup {
-  ensure_installed = {
-    "clangd",
-    "cssls",
-    "cssmodules_ls",
-    "emmet_ls",
-    "eslint",
-    -- "gopls", go needs to be installed for this and installing go sucks
-    "html",
-    "jsonls",
-    "tailwindcss",
-    "tsserver",
-    "volar",
-  }
-}
+require("mason").setup()
+require("mason-lspconfig").setup()
 
 local lspconfig = require("lspconfig")
 local opts = { noremap = true, silent = true }
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local function on_attach(client, bufnr)
