@@ -42,16 +42,15 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'catppuccin/nvim', { 'as' : 'catppuccin' }
 Plug 'nvim-lualine/lualine.nvim'
 call plug#end()
 
 lua require("lsp")
 lua require("treesitter")
 lua require("statusline")
+lua require("colorscheme")
 lua require('gitsigns').setup()
-
-colorscheme dracula
 
 let mapleader = " "
 
