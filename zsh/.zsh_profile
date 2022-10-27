@@ -11,6 +11,7 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 bindkey -s ^f "~/.local/bin/tmux-sessionizer\n"
 
 source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 
 alias vim=$VIM
 alias venvactivate="source ~/work/venv/bin/activate"
