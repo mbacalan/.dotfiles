@@ -14,16 +14,3 @@ source /usr/share/doc/fzf/examples/key-bindings.zsh
 source /usr/share/doc/fzf/examples/completion.zsh
 
 alias vim=$VIM
-alias venvactivate="source ~/work/venv/bin/activate"
-alias ccache="./manage.py clear_cache"
-
-runserver() {
-  source ~/work/venv/bin/activate
-
-  if [ -n "$1" ]
-  then
-    python manage.py runserver 0:$1
-  else
-    python manage.py runserver 0:8083
-  fi
-}
