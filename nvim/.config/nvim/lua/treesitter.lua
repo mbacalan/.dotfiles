@@ -3,6 +3,7 @@ require'nvim-treesitter.configs'.setup {
     "html",
     "javascript",
     "typescript",
+    "tsx",
     "css",
     "scss",
     "json",
@@ -19,11 +20,5 @@ require'nvim-treesitter.configs'.setup {
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-    enable = true
-  },
-  textobjects = {
-    enable = true
   }
 }
