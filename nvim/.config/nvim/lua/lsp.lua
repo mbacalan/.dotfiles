@@ -35,9 +35,7 @@ for _, server in ipairs {
   "gopls",
   "html",
   "jsonls",
-  "tailwindcss",
   "tsserver",
-  "volar",
 } do
   lspconfig[server].setup{ on_attach = on_attach, capabilities = capabilities }
 end
