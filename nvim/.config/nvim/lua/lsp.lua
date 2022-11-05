@@ -2,15 +2,13 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 
 local lspconfig = require("lspconfig")
-
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local opts = { noremap = true, silent = true }
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
-
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local function on_attach(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr}
