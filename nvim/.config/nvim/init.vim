@@ -44,7 +44,7 @@ Plug 'tpope/vim-surround'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 lua require("lsp")
