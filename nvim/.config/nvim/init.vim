@@ -56,6 +56,11 @@ colorscheme dracula
 
 let mapleader = " "
 
+" Center cursor while going up and down
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+nnoremap n nzz
+
 " Telescope
 lua require('telescope').load_extension('fzf')
 nnoremap <leader>ff <cmd>Telescope find_files hidden=true no_ignore=false<cr>
