@@ -21,6 +21,10 @@ local function on_attach(client, bufnr)
   vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
   vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, bufopts)
+
+  if client.server_capabilities.documentFormattingProvider then
+    vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
+  end
 end
 
 for _, server in ipairs {
