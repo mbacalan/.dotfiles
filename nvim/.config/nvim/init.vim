@@ -1,4 +1,4 @@
-syntax on
+syntax enable
 set ma
 set mouse=a
 set scrolloff=8
@@ -59,7 +59,8 @@ let mapleader = " "
 " Center cursor while going up and down
 nnoremap <C-u> <C-u>zz
 nnoremap <C-d> <C-d>zz
-nnoremap n nzz
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " Telescope
 lua require('telescope').load_extension('fzf')
