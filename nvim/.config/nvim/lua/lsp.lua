@@ -31,7 +31,7 @@ for _, server in ipairs {
   "clangd",
   "cssls",
   "cssmodules_ls",
-  "emmet_ls",
+  -- "emmet_ls",
   "eslint",
   "gopls",
   "html",
