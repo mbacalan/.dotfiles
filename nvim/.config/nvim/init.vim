@@ -47,9 +47,10 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
-lua require("lsp")
-lua require("treesitter")
-lua require("statusline")
+lua require('lsp')
+lua require('treesitter')
+lua require('statusline')
+lua require('harpoop')
 lua require('gitsigns').setup()
 
 colorscheme dracula
