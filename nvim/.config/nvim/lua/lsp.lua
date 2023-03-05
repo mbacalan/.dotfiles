@@ -1,89 +1,70 @@
-require("mason").setup()
-require("mason-lspconfig").setup()
+local lsp = require('lsp-zero')
 
-local lspconfig = require("lspconfig")
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+lsp.preset('recommended')
 
-local function on_attach(client, bufnr)
+lsp.ensure_installed({
+  -- 'clangd',
+  'cssls',
+  -- 'cssmodules_ls',
+  -- 'emmet_ls',
+  'eslint',
+  'html',
+  'jsonls',
+  'tsserver',
+  -- 'rust_analyzer',
+  -- 'gopls'
+})
+
+lsp.on_attach(function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr}
 
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, bufopts)
+  vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, bufopts)
+  vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, bufopts)
+  vim.keymap.set('n', 'gr', function () vim.lsp.buf.references() end, bufopts)
+  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, bufopts)
+  vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help() end, bufopts)
+  vim.keymap.set('n', '<leader>D', function() vim.lsp.buf.type_definition() end, bufopts)
+  vim.keymap.set('n', '<leader>rn', function() vim.lsp.buf.rename() end, bufopts)
+  vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, bufopts)
 
-  vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, bufopts)
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
-  vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, bufopts)
+  vim.keymap.set('n', '<leader>e', function() vim.diagnostic.open_float() end, bufopts)
+  vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev() end, bufopts)
+  vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next() end, bufopts)
+  vim.keymap.set('n', '<leader>q', function() vim.diagnostic.setloclist() end, bufopts)
 
   if client.server_capabilities.documentFormattingProvider then
-    vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
+    vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format() end, bufopts)
   end
-end
+end)
 
-for _, server in ipairs {
-  "clangd",
-  "cssls",
-  "cssmodules_ls",
-  -- "emmet_ls",
-  "eslint",
-  "gopls",
-  "html",
-  "jsonls",
-  "tsserver",
-} do
-  lspconfig[server].setup{ on_attach = on_attach, capabilities = capabilities }
-end
+local cmp = require('cmp')
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
+local cmp_mapping = lsp.defaults.cmp_mappings({
+  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+  ['<CR>'] = cmp.mapping.confirm(cmp_select),
+  ['<C-Space>'] = cmp.mapping.complete(),
+})
 
-local luasnip = require 'luasnip'
-local cmp = require 'cmp'
+lsp.setup_nvim_cmp({
+  mapping = cmp_mapping
+})
 
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end,
-    ['<S-Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end,
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = 'buffer' },
-    { name = 'path' },
-  },
-}
+lsp.set_preferences({
+  suggest_lsp_servers = false,
+  sign_icons = {
+    error = 'E',
+    warn = 'W',
+    hint = 'H',
+    info = 'I'
+  }
+})
+
+lsp.nvim_workspace()
+
+lsp.setup()
+
+vim.diagnostic.config({
+  virtual_text = true
+})

@@ -17,8 +17,8 @@ set wildmode=longest,list,full
 set wildignore+=**/node_modules/*
 set wildignore+=**/.git/*
 set clipboard+=unnamedplus
-" new global statusline
 set laststatus=3
+set signcolumn=yes
 
 call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
@@ -27,9 +27,11 @@ Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-path'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
+Plug 'VonHeikemen/lsp-zero.nvim', { 'branch': 'v1.x' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'nvim-lua/plenary.nvim'
