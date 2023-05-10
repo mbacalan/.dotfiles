@@ -34,6 +34,7 @@ return require('packer').startup(function(use)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'romgrk/nvim-treesitter-context'
+  use 'nvim-tree/nvim-tree.lua'
   use 'nvim-lua/plenary.nvim'
   use 'ThePrimeagen/harpoon'
   use 'junegunn/gv.vim'
