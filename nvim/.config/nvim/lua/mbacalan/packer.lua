@@ -40,6 +40,7 @@ return require('packer').startup(function(use)
   use 'junegunn/gv.vim'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-surround'
+  use 'tpope/vim-commentary'
   use 'lewis6991/gitsigns.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'editorconfig/editorconfig-vim'
