@@ -45,6 +45,7 @@ return require('packer').startup(function(use)
   use 'nvim-lualine/lualine.nvim'
   use 'editorconfig/editorconfig-vim'
   use 'folke/zen-mode.nvim'
+  use 'github/copilot.vim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
