@@ -21,7 +21,8 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, bufopts)
   vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, bufopts)
   vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, bufopts)
-  vim.keymap.set('n', 'gr', function () vim.lsp.buf.references() end, bufopts)
+  -- disabled in favor of trouble, check trouble.lua
+  -- vim.keymap.set('n', 'gr', function () vim.lsp.buf.references() end, bufopts)
   vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, bufopts)
   vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help() end, bufopts)
   vim.keymap.set('n', '<leader>D', function() vim.lsp.buf.type_definition() end, bufopts)
@@ -50,7 +51,6 @@ local cmp_mapping = lsp.defaults.cmp_mappings({
 lsp.setup_nvim_cmp({
   mapping = cmp_mapping,
   sources = {
-    { name = "copilot", group_index = 2 },
     { name = 'path' },
     { name = 'nvim_lsp' },
     { name = 'buffer', keyword_length = 3 },
