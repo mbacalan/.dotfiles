@@ -46,18 +46,22 @@ return require('packer').startup(function(use)
   use 'editorconfig/editorconfig-vim'
   use 'folke/zen-mode.nvim'
   use {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
+    'folke/trouble.nvim',
     config = function()
-      require("copilot").setup({})
-    end,
-  }
-  use {
-    "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
-    config = function ()
-      require("copilot_cmp").setup()
+      require('trouble').setup {
+        icons = false,
+        fold_open = "v", -- icon used for open folds
+        fold_closed = ">", -- icon used for closed folds
+        indent_lines = false, -- add an indent guide below the fold icons
+        signs = {
+          -- icons / text used for a diagnostic
+          error = "error",
+          warning = "warn",
+          hint = "hint",
+          information = "info"
+        },
+        use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+      }
     end
   }
 
