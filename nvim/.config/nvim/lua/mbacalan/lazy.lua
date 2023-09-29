@@ -32,6 +32,7 @@ require('lazy').setup({
   'nvim-lualine/lualine.nvim',
   'editorconfig/editorconfig-vim',
   'folke/zen-mode.nvim',
+  'folke/twilight.nvim',
   {
     'folke/trouble.nvim',
     opts = {
