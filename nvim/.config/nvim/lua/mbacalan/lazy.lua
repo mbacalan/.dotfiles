@@ -1,5 +1,4 @@
 require('lazy').setup({
-  'wbthomason/packer.nvim',
   { 'dracula/vim', name = 'dracula' },
   {
     'VonHeikemen/lsp-zero.nvim',
