@@ -13,33 +13,10 @@ require('nvim-tree').setup({
   on_attach = on_attach,
   sort_by = "case_sensitive",
   view = {
-    width = 30,
+    width = 35,
   },
   renderer = {
-    group_empty = true,
-    icons = {
-      glyphs = {
-        default = "-",
-        modified = "●",
-        folder = {
-          arrow_closed = ">",
-          arrow_open = "<",
-          default = "+",
-          open = "u",
-          empty = "-",
-          empty_open = "-",
-        },
-        git = {
-          unstaged = "✗",
-          staged = "✓",
-          unmerged = "UM",
-          renamed = "➜",
-          untracked = "★",
-          deleted = "D",
-          ignored = "◌",
-        },
-      },
-    }
+    group_empty = true
   }
 })
 
