@@ -29,6 +29,12 @@ require('lazy').setup({
   'nvim-tree/nvim-web-devicons',
   'nvim-lua/plenary.nvim',
   'ThePrimeagen/harpoon',
+  {
+    "ThePrimeagen/refactoring.nvim",
+    config = function()
+      require("refactoring").setup()
+    end,
+  },
   'junegunn/gv.vim',
   'tpope/vim-fugitive',
   'tpope/vim-surround',
