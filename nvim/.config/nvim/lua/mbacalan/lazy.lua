@@ -45,4 +45,11 @@ require('lazy').setup({
   'folke/zen-mode.nvim',
   'folke/twilight.nvim',
   'folke/trouble.nvim',
+  { 'echasnovski/mini.nvim', version = '*' },
+  {
+    'Exafunction/codeium.vim',
+    config = function()
+      vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+    end,
+  },
 })
