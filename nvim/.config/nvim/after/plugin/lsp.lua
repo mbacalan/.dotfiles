@@ -69,9 +69,15 @@ lsp.set_preferences({
 })
 
 lsp.nvim_workspace()
-
 lsp.setup()
+
+require('mason-lspconfig').setup()
+require('lspconfig').html.setup({
+  filetypes = { "html", "templ" }
+})
 
 vim.diagnostic.config({
   virtual_text = true
 })
+
+vim.filetype.add({ extension = { templ = "templ" } })
