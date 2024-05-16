@@ -60,6 +60,7 @@ local cmp_action = require('lsp-zero').cmp_action()
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_format = require('lsp-zero').cmp_format()
 
+require('luasnip.loaders.from_vscode').lazy_load()
 
 cmp.setup({
   window = {
