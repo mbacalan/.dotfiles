@@ -1,83 +1,92 @@
-local lsp = require('lsp-zero')
-
-lsp.preset('recommended')
-
-lsp.ensure_installed({
-  -- 'clangd',
-  'cssls',
-  -- 'cssmodules_ls',
-  -- 'emmet_ls',
-  'eslint',
-  'html',
-  'jsonls',
-  'tsserver',
-  -- 'rust_analyzer',
-  -- 'gopls'
-})
-
-lsp.on_attach(function(client, bufnr)
-  local bufopts = { noremap = true, silent = true, buffer = bufnr}
-
-  vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, bufopts)
-  vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, bufopts)
-  vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, bufopts)
-  -- disabled in favor of trouble, check trouble.lua
-  -- vim.keymap.set('n', 'gr', function () vim.lsp.buf.references() end, bufopts)
-  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, bufopts)
-  vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help() end, bufopts)
-  vim.keymap.set('n', '<leader>D', function() vim.lsp.buf.type_definition() end, bufopts)
-  vim.keymap.set('n', '<leader>rn', function() vim.lsp.buf.rename() end, bufopts)
-  vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, bufopts)
-
-  vim.keymap.set('n', '<leader>e', function() vim.diagnostic.open_float() end, bufopts)
-  vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev() end, bufopts)
-  vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next() end, bufopts)
-  vim.keymap.set('n', '<leader>q', function() vim.diagnostic.setloclist() end, bufopts)
-
-  if client.server_capabilities.documentFormattingProvider then
-    vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format() end, bufopts)
-  end
-end)
-
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mapping = lsp.defaults.cmp_mappings({
-  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<CR>'] = cmp.mapping.confirm(cmp_select),
-  ['<C-Space>'] = cmp.mapping.complete(),
-})
-
-lsp.setup_nvim_cmp({
-  mapping = cmp_mapping,
-  sources = {
-    { name = 'path' },
-    { name = 'nvim_lsp' },
-    { name = 'buffer', keyword_length = 3 },
-    { name = 'luasnip', keyword_length = 2 },
-  }
-})
-
-lsp.set_preferences({
-  suggest_lsp_servers = false,
-  sign_icons = {
-    error = 'E',
-    warn = 'W',
-    hint = 'H',
-    info = 'I'
-  }
-})
-
-lsp.nvim_workspace()
-lsp.setup()
-
-require('mason-lspconfig').setup()
-require('lspconfig').html.setup({
-  filetypes = { "html", "templ" }
-})
+local lsp_zero = require('lsp-zero')
 
 vim.diagnostic.config({
-  virtual_text = true
+  virtual_text = false,
+  severity_sort = true,
+  float = {
+    style = 'minimal',
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
 })
 
 vim.filetype.add({ extension = { templ = "templ" } })
+
+lsp_zero.set_sign_icons({
+  error = '✘',
+  warn = '▲',
+  hint = '⚑',
+  info = ''
+})
+
+lsp_zero.on_attach(function(client, bufnr)
+  lsp_zero.default_keymaps({ buffer = bufnr })
+end)
+
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {
+    -- 'clangd',
+    'cssls',
+    'eslint',
+    'html',
+    'jsonls',
+    'tsserver',
+    -- 'rust_analyzer',
+    -- 'gopls'
+  },
+  handlers = {
+    -- this first function is the "default handler"
+    -- it applies to every language server without a "custom handler"
+    function(server_name)
+      require('lspconfig')[server_name].setup({})
+    end,
+
+    lua_ls = function()
+      local lua_opts = lsp_zero.nvim_lua_ls()
+      require('lspconfig').lua_ls.setup(lua_opts)
+    end,
+
+    html = function()
+      require('lspconfig').html.setup({ filetypes = { "html", "templ" } })
+    end
+  }
+})
+
+local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
+local cmp_format = require('lsp-zero').cmp_format()
+
+
+cmp.setup({
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  preselect = 'item',
+  completion = {
+    completeopt = 'menu,menuone,noinsert',
+  },
+  formatting = cmp_format,
+  mapping = cmp.mapping.preset.insert({
+    ['<Tab>'] = cmp_action.luasnip_supertab(),
+    ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+  }),
+  sources = {
+    { name = 'path' },
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lua' },
+    { name = 'buffer', keyword_length = 3 },
+    { name = 'luasnip', keyword_length = 2 },
+  },
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+})
