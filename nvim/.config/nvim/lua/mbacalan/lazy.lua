@@ -28,7 +28,6 @@ require('lazy').setup({
   },
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x' },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-  'nvim-tree/nvim-tree.lua',
   'nvim-tree/nvim-web-devicons',
   'nvim-lua/plenary.nvim',
   'ThePrimeagen/harpoon',
