@@ -25,6 +25,16 @@ lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({ buffer = bufnr })
 end)
 
+lsp_zero.format_mapping('F3', {
+  format_opts = {
+    async = false,
+    timeout_ms = 10000,
+  },
+  servers = {
+    ['biome'] = {'javascript', 'typescript'},
+  }
+})
+
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {
@@ -51,7 +61,7 @@ require('mason-lspconfig').setup({
 
     html = function()
       require('lspconfig').html.setup({ filetypes = { "html", "templ" } })
-    end
+    end,
   }
 })
 
