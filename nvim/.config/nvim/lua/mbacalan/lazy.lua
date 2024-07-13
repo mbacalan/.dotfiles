@@ -26,6 +26,11 @@ require('lazy').setup({
       'romgrk/nvim-treesitter-context',
     }
   },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    event = "VeryLazy",
+    enabled = true,
+  },
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x' },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   'nvim-tree/nvim-web-devicons',
