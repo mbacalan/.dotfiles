@@ -45,6 +45,12 @@ require('lazy').setup({
   'editorconfig/editorconfig-vim',
   'folke/twilight.nvim',
   {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
     'folke/trouble.nvim',
     opts = {
       focus = true

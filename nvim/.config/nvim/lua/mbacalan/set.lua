@@ -19,4 +19,4 @@ vim.opt.clipboard:append('unnamedplus')
 vim.opt.laststatus = 3
 vim.opt.signcolumn = 'yes'
 
-vim.cmd.colorscheme('dracula')
+vim.cmd.colorscheme('tokyonight')
