@@ -22,3 +22,6 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   }
 }
+
+-- TODO: Move to its own file? Follow Lazy plugin structure?
+require('nvim-ts-autotag').setup({})

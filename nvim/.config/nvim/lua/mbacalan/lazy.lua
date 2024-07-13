@@ -31,6 +31,7 @@ require('lazy').setup({
     event = "VeryLazy",
     enabled = true,
   },
+  'windwp/nvim-ts-autotag',
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x' },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   'nvim-tree/nvim-web-devicons',
