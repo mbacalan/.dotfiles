@@ -19,4 +19,23 @@ vim.opt.clipboard:append('unnamedplus')
 vim.opt.laststatus = 3
 vim.opt.signcolumn = 'yes'
 
-vim.cmd.colorscheme('dracula')
+-- Center cursor while going up and down
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+
+-- LSP
+vim.diagnostic.config({
+  virtual_text = false,
+  severity_sort = true,
+  float = {
+    style = 'minimal',
+    border = 'rounded',
+    source = true,
+    header = '',
+    prefix = '',
+  },
+})
+
+vim.filetype.add({ extension = { templ = "templ" } })
