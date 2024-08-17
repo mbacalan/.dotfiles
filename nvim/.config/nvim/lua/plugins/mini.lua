@@ -1,7 +1,6 @@
 return {
   {
-    'echasnovski/mini.nvim',
-    version = '*',
+    'echasnovski/mini.files',
     config = function()
       require('mini.files').setup()
 
