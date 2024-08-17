@@ -9,7 +9,6 @@ return {
     end,
   },
   'folke/twilight.nvim',
-  'nvim-tree/nvim-web-devicons',
   {
     'nvim-lualine/lualine.nvim',
     config = function()
@@ -17,7 +16,7 @@ return {
         options = {
           theme = 'tokyonight',
           style = 'storm',
-          icons_enabled = false
+          icons_enabled = true
         }
       }
     end,
