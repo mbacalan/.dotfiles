@@ -108,7 +108,7 @@ return {
           'eslint',
           'html',
           'jsonls',
-          'tsserver',
+          'ts_ls',
           'lua_ls',
           -- 'rust_analyzer',
           -- 'gopls'
