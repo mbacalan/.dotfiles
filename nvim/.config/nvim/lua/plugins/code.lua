@@ -51,10 +51,10 @@ return {
   },
   {
     'lewis6991/gitsigns.nvim',
-    opts= {}
+    opts = {}
   },
   {
-    'Exafunction/codeium.vim',
+    'Exafunction/codeium.nvim',
     config = function()
       vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
     end,
