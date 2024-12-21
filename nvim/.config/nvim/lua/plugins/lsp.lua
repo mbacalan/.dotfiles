@@ -51,7 +51,6 @@ return {
           { name = 'path' },
           { name = 'nvim_lsp' },
           { name = 'nvim_lua' },
-          { name = 'codeium' },
           { name = 'luasnip', keyword_length = 2 },
           { name = 'buffer', keyword_length = 3 },
         },
