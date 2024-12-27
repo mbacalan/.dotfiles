@@ -1,6 +1,24 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
 
+local function get_domain_name(tab)
+  local domain = tab.active_pane.domain_name
+  if domain == "local" then
+    return ""
+  end
+  return "[" .. domain .. "] "
+end
+
+-- Events
+wezterm.on("format-tab-title", function(tab)
+  local title = get_domain_name(tab)
+  title = title .. tab.active_pane.title
+
+  return {
+    { Text = " " .. title .. " " },
+  }
+end)
+
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
