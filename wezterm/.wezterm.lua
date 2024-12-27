@@ -24,9 +24,10 @@ local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices
 config.color_scheme = 'Tokyo Night'
-config.use_fancy_tab_bar = true
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-config.font = wezterm.font 'Cascadia Code NF'
+config.font = wezterm.font_with_fallback {
+  'Cascadia Code NF', 'Segoe UI Emoji'
+}
 config.font_size = 13
 
 config.ssh_domains = {
