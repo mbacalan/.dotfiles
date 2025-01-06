@@ -6,10 +6,12 @@ export GIT_EDITOR=$VIM
 export DOTFILES=$HOME/.dotfiles
 
 export VOLTA_HOME="$HOME/.volta"
+export FLYCTL_INSTALL="$HOME/.fly"
 export PATH="$VOLTA_HOME/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:/home/mbacalan/go/bin"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+export PATH="$PATH:$HOME/go/bin"
 
 bindkey -s ^f "~/.local/bin/tmux-sessionizer\n"
 

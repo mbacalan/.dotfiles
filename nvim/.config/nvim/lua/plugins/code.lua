@@ -53,14 +53,4 @@ return {
     'lewis6991/gitsigns.nvim',
     opts = {}
   },
-  -- {
-  --   'Exafunction/codeium.nvim',
-  --   config = function()
-  --     require('codeium').setup({
-  --       enable_chat = true
-  --     })
-  --
-  --     vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-  --   end,
-  -- },
 }
