@@ -90,3 +90,9 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.zsh_profile
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# bun completions
+[ -s "/home/mbacalan/.bun/_bun" ] && source "/home/mbacalan/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
