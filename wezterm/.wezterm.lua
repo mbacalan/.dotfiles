@@ -46,6 +46,7 @@ config.ssh_domains = {
 }
 
 config.max_fps = 120
+config.front_end = 'WebGpu'
 
 -- and finally, return the configuration to wezterm
 return config
