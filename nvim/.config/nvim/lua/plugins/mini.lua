@@ -34,6 +34,14 @@ return {
           vim.keymap.set('n', 'g.', toggle_dotfiles, { buffer = buf_id })
         end,
       })
+
+      -- snacks.nvim lsp-integrated file rename
+      vim.api.nvim_create_autocmd('User', {
+        pattern = "MiniFilesActionRename",
+        callback = function(event)
+          Snacks.rename.on_rename_file(event.data.from, event.data.to)
+        end,
+      })
     end
   },
   {
