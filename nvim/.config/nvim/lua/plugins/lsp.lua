@@ -1,11 +1,5 @@
 return {
   {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v4.x',
-    lazy = true,
-    config = false,
-  },
-  {
     'williamboman/mason.nvim',
     lazy = false,
     config = true,
@@ -25,12 +19,17 @@ return {
     },
     config = function()
       local cmp = require('cmp')
-      local cmp_action = require('lsp-zero').cmp_action()
-      local cmp_format = require('lsp-zero').cmp_format()
 
       require('luasnip.loaders.from_vscode').lazy_load()
 
       cmp.setup({
+        sources = {
+          { name = 'path' },
+          { name = 'nvim_lsp' },
+          { name = 'nvim_lua' },
+          { name = 'luasnip', keyword_length = 2 },
+          { name = 'buffer',  keyword_length = 3 },
+        },
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
@@ -39,21 +38,57 @@ return {
         completion = {
           completeopt = 'menu,menuone,noinsert',
         },
-        formatting = cmp_format,
+        formatting = {
+          -- changing the order of fields so the icon is the first
+          fields = { 'menu', 'abbr', 'kind' },
+
+          -- here is where the change happens
+          format = function(entry, item)
+            local menu_icon = {
+              nvim_lsp = 'λ',
+              luasnip = '⋗',
+              buffer = 'Ω',
+              path = '🖫',
+              nvim_lua = 'Π',
+            }
+
+            item.menu = menu_icon[entry.source.name]
+            return item
+          end,
+        },
         mapping = cmp.mapping.preset.insert({
-          ['<tab>'] = cmp_action.luasnip_supertab(),
-          ['<s-tab>'] = cmp_action.luasnip_shift_supertab(),
+          -- Super tab
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            local luasnip = require('luasnip')
+            local col = vim.fn.col('.') - 1
+
+            if cmp.visible() then
+              cmp.select_next_item({ behavior = 'select' })
+            elseif luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+              fallback()
+            else
+              cmp.complete()
+            end
+          end, { 'i', 's' }),
+
+          -- Super shift tab
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            local luasnip = require('luasnip')
+
+            if cmp.visible() then
+              cmp.select_prev_item({ behavior = 'select' })
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
           ['<c-space>'] = cmp.mapping.complete(),
           ['<c-e>'] = cmp.mapping.abort(),
-          ['<cr>'] = cmp.mapping.confirm({select = false}),
+          ['<cr>'] = cmp.mapping.confirm({ select = false }),
         }),
-        sources = {
-          { name = 'path' },
-          { name = 'nvim_lsp' },
-          { name = 'nvim_lua' },
-          { name = 'luasnip', keyword_length = 2 },
-          { name = 'buffer', keyword_length = 3 },
-        },
         snippet = {
           expand = function(args)
             require('luasnip').lsp_expand(args.body)
@@ -68,37 +103,30 @@ return {
     cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      {'hrsh7th/cmp-nvim-lsp'},
-      {'williamboman/mason.nvim'},
-      {'williamboman/mason-lspconfig.nvim'},
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
     },
     config = function()
-      local lsp_zero = require('lsp-zero')
-      local lsp_attach = function(_, bufnr)
-        lsp_zero.default_keymaps({ buffer = bufnr })
-      end
+      local lsp_defaults = require('lspconfig').util.default_config
 
-      lsp_zero.extend_lspconfig({
-        capabilities = require('cmp_nvim_lsp').default_capabilities(),
-        lsp_attach = lsp_attach,
-        format_on_save = true,
-        float_order = 'rounded',
-        sign_text = {
-          error = '✘',
-          warn = '▲',
-          hint = '⚑',
-          info = '»',
-        }
-      })
 
-      lsp_zero.format_mapping('F3', {
-        format_opts = {
-          async = false,
-          timeout_ms = 10000,
-        },
-        servers = {
-          ['biome'] = {'javascript', 'typescript'},
-        }
+      lsp_defaults.capabilities = vim.tbl_deep_extend(
+        'force',
+        lsp_defaults.capabilities,
+        require('cmp_nvim_lsp').default_capabilities()
+      )
+
+      vim.api.nvim_create_autocmd('LspAttach', {
+        desc = 'LSP actions',
+        callback = function(event)
+          local opts = { buffer = event.buf }
+
+          vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+          vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+          vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+          vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+        end,
       })
 
       require('mason-lspconfig').setup({
@@ -120,15 +148,31 @@ return {
             require('lspconfig')[server_name].setup({})
           end,
 
-          lua_ls = function()
-            local lua_opts = lsp_zero.nvim_lua_ls()
-            require('lspconfig').lua_ls.setup(lua_opts)
-          end,
-
           html = function()
             require('lspconfig').html.setup({ filetypes = { "html", "templ" } })
           end,
         }
+      })
+
+      vim.diagnostic.config({
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = '✘',
+            [vim.diagnostic.severity.WARN] = '▲',
+            [vim.diagnostic.severity.HINT] = '⚑',
+            [vim.diagnostic.severity.INFO] = '»',
+          },
+        },
+      })
+
+      vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(event)
+          local opts = { buffer = event.buf }
+
+          vim.keymap.set({ 'n', 'x' }, '<F3>', function()
+            vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
+          end, opts)
+        end
       })
     end
   }
