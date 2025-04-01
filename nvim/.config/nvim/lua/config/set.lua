@@ -29,6 +29,9 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 -- LSP
 vim.diagnostic.config({
   virtual_text = true,
+  virtual_lines = {
+    current_line = true,
+  },
   severity_sort = true,
   float = {
     style = 'minimal',
