@@ -19,6 +19,7 @@ vim.opt.clipboard:append('unnamedplus')
 vim.opt.laststatus = 3
 vim.opt.signcolumn = 'yes'
 vim.g.python3_host_prog = '/usr/bin/python3.11'
+vim.o.winborder = 'rounded'
 
 -- Center cursor while going up and down
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
