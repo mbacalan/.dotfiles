@@ -1,8 +1,7 @@
 return {
   {
-    'williamboman/mason.nvim',
-    lazy = false,
-    config = true,
+    'mason-org/mason.nvim',
+    opts = {}
   },
   -- Autocompletion
   {
