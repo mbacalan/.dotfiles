@@ -7,7 +7,7 @@ return {
       TS.update(nil, { summary = true })
     end,
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-    event = { "LazyFile", "VeryLazy" },
+    event = { "VeryLazy" },
     cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
     config = function()
       require('nvim-treesitter.configs').setup({
