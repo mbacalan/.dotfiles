@@ -132,7 +132,7 @@ return {
         ensure_installed = {
           -- 'clangd',
           'cssls',
-          'eslint',
+          -- 'eslint',
           'html',
           'jsonls',
           'ts_ls',
