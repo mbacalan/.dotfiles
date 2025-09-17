@@ -53,4 +53,9 @@ return {
     'lewis6991/gitsigns.nvim',
     opts = {}
   },
+  {
+    "folke/ts-comments.nvim",
+    event = "VeryLazy",
+    opts = {},
+  }
 }
