@@ -78,5 +78,47 @@ return {
       -- better deal with markdown code blocks
       markdown = true,
     },
+  },
+  {
+    'echasnovski/mini.surround',
+    event = 'VeryLazy',
+    opts = {
+      -- gz prefix to avoid conflicts with gs (signature help) in LSP buffers
+      mappings = {
+        add            = 'gza',
+        delete         = 'gzd',
+        find           = 'gzf',
+        find_left      = 'gzF',
+        highlight      = 'gzh',
+        replace        = 'gzr',
+        update_n_lines = 'gzn',
+      },
+    },
+  },
+  {
+    "nvim-mini/mini.ai",
+    event = "VeryLazy",
+    opts = function()
+      local ai = require("mini.ai")
+      return {
+        n_lines = 500,
+        custom_textobjects = {
+          o = ai.gen_spec.treesitter({ -- code block
+            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+          }),
+          f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
+          c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),       -- class
+          t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },           -- tags
+          d = { "%f[%d]%d+" },                                                          -- digits
+          e = {                                                                         -- Word with case
+            { "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
+            "^().*()$",
+          },
+          u = ai.gen_spec.function_call(),                           -- u for "Usage"
+          U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+        },
+      }
+    end,
   }
 }

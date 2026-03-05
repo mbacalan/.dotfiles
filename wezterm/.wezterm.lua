@@ -38,14 +38,15 @@ config.ssh_domains = {
     multiplexing = 'None'
   },
   {
-    name = 'SSH OVH VPS',
-    remote_address = '135.125.183.175:62040',
-    username = 'ubuntu',
+    name = 'RPi',
+    remote_address = '192.168.178.35',
+    username = 'mbacalan',
     multiplexing = 'None'
   }
 }
 
-config.max_fps = 120
+config.max_fps = 60
+config.animation_fps = 60
 config.front_end = 'WebGpu'
 
 -- and finally, return the configuration to wezterm

@@ -1,4 +1,3 @@
-vim.opt.ma = true
 vim.opt.mouse = 'a'
 vim.opt.scrolloff = 8
 vim.opt.number = true
@@ -20,6 +19,10 @@ vim.opt.laststatus = 3
 vim.opt.signcolumn = 'yes'
 vim.g.python3_host_prog = '/usr/bin/python3.11'
 vim.o.winborder = 'rounded'
+vim.opt.undofile = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.wrap = false
 
 -- Center cursor while going up and down
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
@@ -40,6 +43,14 @@ vim.diagnostic.config({
     source = true,
     header = '',
     prefix = '',
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '✘',
+      [vim.diagnostic.severity.WARN]  = '▲',
+      [vim.diagnostic.severity.HINT]  = '⚑',
+      [vim.diagnostic.severity.INFO]  = '»',
+    },
   },
 })
 
