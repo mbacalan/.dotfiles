@@ -1,6 +1,6 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -15,5 +15,5 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
 
-require('lazy').setup('plugins')
 require('config/set')
+require('lazy').setup('plugins')

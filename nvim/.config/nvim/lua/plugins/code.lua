@@ -3,7 +3,6 @@ return {
   'junegunn/gv.vim',
   'tpope/vim-fugitive',
   'tpope/vim-surround',
-  'editorconfig/editorconfig-vim',
   {
     'ThePrimeagen/harpoon',
     config = function()

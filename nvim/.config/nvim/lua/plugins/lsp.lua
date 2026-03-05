@@ -102,7 +102,6 @@ return {
     cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp' },
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
     },
@@ -125,6 +124,9 @@ return {
           vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
           vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
           vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+          vim.keymap.set({ 'n', 'x' }, '<F3>', function()
+            vim.lsp.buf.format({ name = "biome", async = false, timeout_ms = 10000 })
+          end, opts)
         end,
       })
 
@@ -153,26 +155,6 @@ return {
         }
       })
 
-      vim.diagnostic.config({
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = '✘',
-            [vim.diagnostic.severity.WARN] = '▲',
-            [vim.diagnostic.severity.HINT] = '⚑',
-            [vim.diagnostic.severity.INFO] = '»',
-          },
-        },
-      })
-
-      vim.api.nvim_create_autocmd('LspAttach', {
-        callback = function(event)
-          local opts = { buffer = event.buf }
-
-          vim.keymap.set({ 'n', 'x' }, '<F3>', function()
-            vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
-          end, opts)
-        end
-      })
     end
   }
 }
