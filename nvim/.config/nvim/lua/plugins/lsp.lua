@@ -5,96 +5,44 @@ return {
   },
   -- Autocompletion
   {
-    'hrsh7th/nvim-cmp',
+    'saghen/blink.cmp',
     event = 'InsertEnter',
+    version = '1.*',
     dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-nvim-lua' },
-      { 'hrsh7th/cmp-path' },
-      { 'saadparwaiz1/cmp_luasnip' },
       { 'L3MON4D3/LuaSnip' },
       { 'rafamadriz/friendly-snippets' },
     },
-    config = function()
-      local cmp = require('cmp')
-
-      require('luasnip.loaders.from_vscode').lazy_load()
-
-      cmp.setup({
-        sources = {
-          { name = 'path' },
-          { name = 'nvim_lsp' },
-          { name = 'nvim_lua' },
-          { name = 'luasnip', keyword_length = 2 },
-          { name = 'buffer',  keyword_length = 3 },
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        preselect = 'item',
-        completion = {
-          completeopt = 'menu,menuone,noinsert',
-        },
-        formatting = {
-          -- changing the order of fields so the icon is the first
-          fields = { 'menu', 'abbr', 'kind' },
-
-          -- here is where the change happens
-          format = function(entry, item)
-            local menu_icon = {
-              nvim_lsp = 'λ',
-              luasnip = '⋗',
-              buffer = 'Ω',
-              path = '🖫',
-              nvim_lua = 'Π',
-            }
-
-            item.menu = menu_icon[entry.source.name]
-            return item
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          -- Super tab
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            local luasnip = require('luasnip')
-            local col = vim.fn.col('.') - 1
-
-            if cmp.visible() then
-              cmp.select_next_item({ behavior = 'select' })
-            elseif luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-              fallback()
-            else
-              cmp.complete()
-            end
-          end, { 'i', 's' }),
-
-          -- Super shift tab
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-            local luasnip = require('luasnip')
-
-            if cmp.visible() then
-              cmp.select_prev_item({ behavior = 'select' })
-            elseif luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-          ['<c-space>'] = cmp.mapping.complete(),
-          ['<c-e>'] = cmp.mapping.abort(),
-          ['<cr>'] = cmp.mapping.confirm({ select = false }),
-        }),
-        snippet = {
-          expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-          end,
-        },
-      })
-    end,
+    opts = {
+      keymap = { preset = 'default' },
+      appearance = {
+        nerd_font_variant = 'mono',
+      },
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+      snippets = { preset = 'luasnip' },
+    },
+  },
+  -- Formatting
+  {
+    'stevearc/conform.nvim',
+    event = 'BufWritePre',
+    opts = {
+      formatters_by_ft = {
+        javascript      = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
+        typescript      = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
+        javascriptreact = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
+        json            = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
+        css             = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
+        svelte          = { 'prettierd', 'prettier', stop_after_first = true },
+        go              = { 'goimports', 'gofmt', stop_after_first = true },
+      },
+      format_on_save = {
+        timeout_ms = 2000,
+        lsp_fallback = true,
+      },
+    },
   },
   -- LSP
   {
@@ -102,17 +50,17 @@ return {
     cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
+      { 'saghen/blink.cmp' },
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
     },
     config = function()
       local lsp_defaults = require('lspconfig').util.default_config
 
-
       lsp_defaults.capabilities = vim.tbl_deep_extend(
         'force',
         lsp_defaults.capabilities,
-        require('cmp_nvim_lsp').default_capabilities()
+        require('blink.cmp').get_lsp_capabilities()
       )
 
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -125,7 +73,7 @@ return {
           vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
           vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
           vim.keymap.set({ 'n', 'x' }, '<F3>', function()
-            vim.lsp.buf.format({ name = "biome", async = false, timeout_ms = 10000 })
+            require('conform').format({ async = false, timeout_ms = 10000 })
           end, opts)
         end,
       })

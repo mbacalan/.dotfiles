@@ -80,6 +80,22 @@ return {
     },
   },
   {
+    'echasnovski/mini.surround',
+    event = 'VeryLazy',
+    opts = {
+      -- gz prefix to avoid conflicts with gs (signature help) in LSP buffers
+      mappings = {
+        add            = 'gza',
+        delete         = 'gzd',
+        find           = 'gzf',
+        find_left      = 'gzF',
+        highlight      = 'gzh',
+        replace        = 'gzr',
+        update_n_lines = 'gzn',
+      },
+    },
+  },
+  {
     "nvim-mini/mini.ai",
     event = "VeryLazy",
     opts = function()
