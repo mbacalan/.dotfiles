@@ -20,6 +20,9 @@ return {
       { "<leader>fg",      function() Snacks.picker.git_files() end,            desc = "Find Git Files" },
       { "<leader>fe",      function() Snacks.explorer() end,                    desc = "File Explorer" },
       { "<leader>ss",      function() Snacks.picker.lsp_symbols() end,          desc = "LSP Symbols" },
+      -- git
+      { "<leader>gl",      function() Snacks.picker.git_log() end,                              desc = "Git Log" },
+      { "<leader>gL",      function() Snacks.picker.git_log({ cwd = vim.fn.expand("%:p:h") }) end, desc = "Git Log (file)" },
       -- snacks.words
       { "]]",              function() Snacks.words.jump(vim.v.count1) end,      desc = "Next Reference",        mode = { "n", "t" } },
       { "[[",              function() Snacks.words.jump(-vim.v.count1) end,     desc = "Prev Reference",        mode = { "n", "t" } },
