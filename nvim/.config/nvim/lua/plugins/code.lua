@@ -1,53 +1,57 @@
 return {
-  'nvim-lua/plenary.nvim',
-  'tpope/vim-fugitive',
-  {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
-    config = function()
-      local harpoon = require('harpoon')
-      harpoon:setup()
+	"nvim-lua/plenary.nvim",
+	"tpope/vim-fugitive",
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		config = function()
+			local harpoon = require("harpoon")
+			harpoon:setup()
 
-      vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-      vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-    end,
-  },
-  {
-    "ThePrimeagen/refactoring.nvim",
-    config = function()
-      require("refactoring").setup()
-      -- prompt for a refactor to apply when the remap is triggered
-      vim.keymap.set(
-        { "n", "x" },
-        "<leader>rr",
-        function() require('refactoring').select_refactor() end
-      )
-      -- Note that not all refactor support both normal and visual mode
+			vim.keymap.set("n", "<leader>a", function()
+				harpoon:list():add()
+			end)
+			vim.keymap.set("n", "<C-e>", function()
+				harpoon.ui:toggle_quick_menu(harpoon:list())
+			end)
+		end,
+	},
+	{
+		"ThePrimeagen/refactoring.nvim",
+		config = function()
+			require("refactoring").setup()
+			-- prompt for a refactor to apply when the remap is triggered
+			vim.keymap.set({ "n", "x" }, "<leader>rr", function()
+				require("refactoring").select_refactor()
+			end)
+			-- Note that not all refactor support both normal and visual mode
 
-      -- You can also use below = true here to to change the position of the printf
-      -- statement (or set two remaps for either one). This remap must be made in normal mode.
-      vim.keymap.set(
-        "n",
-        "<leader>rp",
-        function() require('refactoring').debug.printf({ below = false }) end
-      )
+			-- You can also use below = true here to to change the position of the printf
+			-- statement (or set two remaps for either one). This remap must be made in normal mode.
+			vim.keymap.set("n", "<leader>rp", function()
+				require("refactoring").debug.printf({ below = false })
+			end)
 
-      -- Print var
+			-- Print var
 
-      vim.keymap.set({ "x", "n" }, "<leader>rv", function() require('refactoring').debug.print_var() end)
-      -- Supports both visual and normal mode
+			vim.keymap.set({ "x", "n" }, "<leader>rv", function()
+				require("refactoring").debug.print_var()
+			end)
+			-- Supports both visual and normal mode
 
-      vim.keymap.set("n", "<leader>rc", function() require('refactoring').debug.cleanup({}) end)
-      -- Supports only normal mode
-    end,
-  },
-  {
-    'lewis6991/gitsigns.nvim',
-    opts = {}
-  },
-  {
-    "folke/ts-comments.nvim",
-    event = "VeryLazy",
-    opts = {},
-  }
+			vim.keymap.set("n", "<leader>rc", function()
+				require("refactoring").debug.cleanup({})
+			end)
+			-- Supports only normal mode
+		end,
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		opts = {},
+	},
+	{
+		"folke/ts-comments.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
 }
