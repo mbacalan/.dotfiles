@@ -33,14 +33,14 @@ config.font_size = wezterm.target_triple:find("darwin") and 16 or 13
 
 config.ssh_domains = {
 	{
-		name = "SSH Optiplex",
-		remote_address = "192.168.178.250",
+		name = "Optiplex",
+		remote_address = "192.168.2.250",
 		username = "mbacalan",
 		multiplexing = "None",
 	},
 	{
 		name = "RPi",
-		remote_address = "192.168.178.35",
+		remote_address = "192.168.2.249",
 		username = "mbacalan",
 		multiplexing = "None",
 	},
