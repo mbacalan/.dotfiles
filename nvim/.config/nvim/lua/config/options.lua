@@ -23,35 +23,3 @@ vim.opt.undofile = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.wrap = false
-
--- Center cursor while going up and down
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
--- LSP
-vim.diagnostic.config({
-	virtual_text = true,
-	virtual_lines = {
-		current_line = true,
-	},
-	severity_sort = true,
-	float = {
-		style = "minimal",
-		border = "rounded",
-		source = true,
-		header = "",
-		prefix = "",
-	},
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = "✘",
-			[vim.diagnostic.severity.WARN] = "▲",
-			[vim.diagnostic.severity.HINT] = "⚑",
-			[vim.diagnostic.severity.INFO] = "»",
-		},
-	},
-})
-
-vim.filetype.add({ extension = { templ = "templ" } })
