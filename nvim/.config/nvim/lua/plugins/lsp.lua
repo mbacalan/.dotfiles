@@ -63,6 +63,10 @@ return {
 					svelte = { "prettierd", "prettier", stop_after_first = true },
 					go = { "goimports", "gofmt", stop_after_first = true },
 				},
+				formatters = {
+					-- Only use biome in projects that have a biome config, otherwise fall through to prettier
+					biome = { require_cwd = true },
+				},
 				format_on_save = {
 					timeout_ms = 2000,
 					lsp_format = "fallback",
