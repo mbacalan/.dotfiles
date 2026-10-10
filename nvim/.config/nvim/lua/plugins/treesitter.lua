@@ -1,11 +1,9 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "master",
 		version = false,
-		build = function()
-			local TS = require("nvim-treesitter")
-			TS.update(nil, { summary = true })
-		end,
+		build = ":TSUpdate",
 		lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
 		event = { "VeryLazy" },
 		cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
