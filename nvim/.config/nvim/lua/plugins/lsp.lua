@@ -1,6 +1,7 @@
 return {
 	{
 		"mason-org/mason.nvim",
+		cmd = "Mason", -- otherwise loaded by nvim-lspconfig
 		opts = {},
 	},
 	-- Neovim Lua API and plugin types for lua_ls

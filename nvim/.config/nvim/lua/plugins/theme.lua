@@ -9,16 +9,18 @@ return {
 			vim.cmd.colorscheme("tokyonight")
 		end,
 	},
-	"folke/twilight.nvim",
+	{
+		"folke/twilight.nvim",
+		cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
+	},
 	{
 		"nvim-lualine/lualine.nvim",
-		config = function()
-			require("lualine").setup({
-				options = {
-					theme = "tokyonight",
-					icons_enabled = true,
-				},
-			})
-		end,
+		event = "VeryLazy",
+		opts = {
+			options = {
+				theme = "tokyonight",
+				icons_enabled = true,
+			},
+		},
 	},
 }

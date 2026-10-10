@@ -10,23 +10,26 @@ return {
 		cmd = "Trouble",
 		specs = {
 			"folke/snacks.nvim",
-			opts = function(_, opts)
-				return vim.tbl_deep_extend("force", opts or {}, {
-					picker = {
-						actions = require("trouble.sources.snacks").actions,
-						win = {
-							input = {
-								keys = {
-									["<c-t>"] = {
-										"trouble_open",
-										mode = { "n", "i" },
-									},
+			opts = {
+				picker = {
+					actions = {
+						-- Wrapped so trouble only loads when the action is used
+						trouble_open = function(picker)
+							require("trouble.sources.snacks").actions.trouble_open.action(picker)
+						end,
+					},
+					win = {
+						input = {
+							keys = {
+								["<c-t>"] = {
+									"trouble_open",
+									mode = { "n", "i" },
 								},
 							},
 						},
 					},
-				})
-			end,
+				},
+			},
 		},
 		keys = {
 			{

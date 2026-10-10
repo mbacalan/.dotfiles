@@ -1,25 +1,29 @@
 return {
 	{
 		"nvim-mini/mini.files",
+		lazy = false, -- default explorer when opening a directory
+		keys = {
+			{
+				"<C-t>",
+				-- Toggle explorer at the current file, or the cwd for non-file buffers (fugitive, terminal, ...)
+				function()
+					if MiniFiles.close() then
+						return
+					end
+
+					local path = vim.api.nvim_buf_get_name(0)
+					if not vim.uv.fs_stat(path) then
+						path = vim.fs.dirname(path)
+						path = vim.uv.fs_stat(path) and path or nil
+					end
+
+					MiniFiles.open(path, true)
+				end,
+				silent = true,
+			},
+		},
 		config = function()
 			require("mini.files").setup()
-
-			-- Toggle explorer at the current file, or the cwd for non-file buffers (fugitive, terminal, ...)
-			local minifiles_toggle = function()
-				if MiniFiles.close() then
-					return
-				end
-
-				local path = vim.api.nvim_buf_get_name(0)
-				if not vim.uv.fs_stat(path) then
-					path = vim.fs.dirname(path)
-					path = vim.uv.fs_stat(path) and path or nil
-				end
-
-				MiniFiles.open(path, true)
-			end
-
-			vim.keymap.set("n", "<C-t>", minifiles_toggle, { silent = true, noremap = true })
 
 			-- Create mapping to show/hide dot-files
 			local show_dotfiles = true
