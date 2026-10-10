@@ -3,6 +3,18 @@ return {
 		"mason-org/mason.nvim",
 		opts = {},
 	},
+	-- Neovim Lua API and plugin types for lua_ls
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				{ path = "snacks.nvim", words = { "Snacks" } },
+				{ path = "mini.files", words = { "MiniFiles" } },
+			},
+		},
+	},
 	-- Autocompletion
 	{
 		"saghen/blink.cmp",
@@ -23,6 +35,12 @@ return {
 			},
 			sources = {
 				default = { "lsp", "path", "snippets", "buffer" },
+				per_filetype = {
+					lua = { inherit_defaults = true, "lazydev" },
+				},
+				providers = {
+					lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
+				},
 			},
 		},
 	},
