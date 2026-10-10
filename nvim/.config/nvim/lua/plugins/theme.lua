@@ -3,9 +3,10 @@ return {
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
-		opts = {},
-		config = function()
-			vim.cmd([[colorscheme tokyonight]])
+		opts = { style = "storm" },
+		config = function(_, opts)
+			require("tokyonight").setup(opts)
+			vim.cmd.colorscheme("tokyonight")
 		end,
 	},
 	"folke/twilight.nvim",
@@ -15,7 +16,6 @@ return {
 			require("lualine").setup({
 				options = {
 					theme = "tokyonight",
-					style = "storm",
 					icons_enabled = true,
 				},
 			})
