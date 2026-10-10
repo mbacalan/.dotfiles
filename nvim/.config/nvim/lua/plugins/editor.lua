@@ -23,7 +23,7 @@ return {
 					{ "[", group = "prev" },
 					{ "]", group = "next" },
 					{ "g", group = "goto" },
-					{ "gs", group = "surround" },
+					{ "gz", group = "surround" },
 					{ "z", group = "fold" },
 					{
 						"<leader>b",
