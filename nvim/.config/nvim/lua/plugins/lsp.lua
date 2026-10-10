@@ -60,11 +60,6 @@ return {
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		config = function()
-			local lsp_defaults = require("lspconfig").util.default_config
-
-			lsp_defaults.capabilities =
-				vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("blink.cmp").get_lsp_capabilities())
-
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP actions",
 				callback = function(event)
@@ -80,6 +75,9 @@ return {
 				end,
 			})
 
+			vim.lsp.config("html", { filetypes = { "html", "templ" } })
+
+			-- Installed servers are enabled automatically (automatic_enable)
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					-- 'clangd',
@@ -91,17 +89,6 @@ return {
 					"lua_ls",
 					-- 'rust_analyzer',
 					-- 'gopls'
-				},
-				handlers = {
-					-- this first function is the "default handler"
-					-- it applies to every language server without a "custom handler"
-					function(server_name)
-						require("lspconfig")[server_name].setup({})
-					end,
-
-					html = function()
-						require("lspconfig").html.setup({ filetypes = { "html", "templ" } })
-					end,
 				},
 			})
 		end,
