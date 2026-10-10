@@ -9,7 +9,6 @@ return {
 		event = "InsertEnter",
 		version = "1.*",
 		dependencies = {
-			{ "L3MON4D3/LuaSnip" },
 			{ "rafamadriz/friendly-snippets" },
 		},
 		opts = {
@@ -25,7 +24,6 @@ return {
 			sources = {
 				default = { "lsp", "path", "snippets", "buffer" },
 			},
-			snippets = { preset = "luasnip" },
 		},
 	},
 	-- Formatting
