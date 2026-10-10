@@ -31,32 +31,32 @@ return {
 		keys = {
 			{
 				"<leader>xx",
-				"<cmd>Trouble diagnostics toggle focus=true win.position=bottom<cr>",
+				"<cmd>Trouble diagnostics toggle<cr>",
 				desc = "Diagnostics (Trouble)",
 			},
 			{
 				"<leader>xX",
-				"<cmd>Trouble diagnostics toggle focus=true filter.buf=0 win.position=bottom<cr>",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 				desc = "Buffer Diagnostics (Trouble)",
 			},
 			{
 				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=true win.position=bottom<cr>",
+				"<cmd>Trouble symbols toggle<cr>",
 				desc = "Symbols (Trouble)",
 			},
 			{
 				"<leader>cl",
-				"<cmd>Trouble lsp toggle focus=true win.position=bottom<cr>",
+				"<cmd>Trouble lsp toggle<cr>",
 				desc = "LSP Definitions / references / ... (Trouble)",
 			},
 			{
 				"<leader>xL",
-				"<cmd>Trouble loclist toggle focus=true win.position=bottom<cr>",
+				"<cmd>Trouble loclist toggle<cr>",
 				desc = "Location List (Trouble)",
 			},
 			{
 				"<leader>xQ",
-				"<cmd>Trouble qflist toggle focus=true win.position=bottom<cr>",
+				"<cmd>Trouble qflist toggle<cr>",
 				desc = "Quickfix List (Trouble)",
 			},
 		},

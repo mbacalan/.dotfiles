@@ -30,22 +30,26 @@ return {
 	{
 		"stevearc/conform.nvim",
 		event = "BufWritePre",
-		opts = {
-			formatters_by_ft = {
-				javascript = { "biome", "prettierd", "prettier", stop_after_first = true },
-				typescript = { "biome", "prettierd", "prettier", stop_after_first = true },
-				javascriptreact = { "biome", "prettierd", "prettier", stop_after_first = true },
-				typescriptreact = { "biome", "prettierd", "prettier", stop_after_first = true },
-				json = { "biome", "prettierd", "prettier", stop_after_first = true },
-				css = { "biome", "prettierd", "prettier", stop_after_first = true },
-				svelte = { "prettierd", "prettier", stop_after_first = true },
-				go = { "goimports", "gofmt", stop_after_first = true },
-			},
-			format_on_save = {
-				timeout_ms = 2000,
-				lsp_format = "fallback",
-			},
-		},
+		opts = function()
+			local web = { "biome", "prettierd", "prettier", stop_after_first = true }
+
+			return {
+				formatters_by_ft = {
+					javascript = web,
+					typescript = web,
+					javascriptreact = web,
+					typescriptreact = web,
+					json = web,
+					css = web,
+					svelte = { "prettierd", "prettier", stop_after_first = true },
+					go = { "goimports", "gofmt", stop_after_first = true },
+				},
+				format_on_save = {
+					timeout_ms = 2000,
+					lsp_format = "fallback",
+				},
+			}
+		end,
 	},
 	-- LSP
 	{
