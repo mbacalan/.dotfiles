@@ -49,6 +49,16 @@ return {
 	{
 		"stevearc/conform.nvim",
 		event = "BufWritePre",
+		keys = {
+			{
+				"<leader>cf",
+				function()
+					require("conform").format({ async = false, timeout_ms = 10000, lsp_format = "fallback" })
+				end,
+				mode = { "n", "x" },
+				desc = "Format",
+			},
+		},
 		opts = function()
 			local web = { "biome", "prettierd", "prettier", stop_after_first = true }
 
@@ -113,16 +123,31 @@ return {
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP actions",
+				-- K (hover), grn (rename) and gra (code action) are Neovim defaults
 				callback = function(event)
-					local opts = { buffer = event.buf }
+					local function map(lhs, rhs, desc)
+						vim.keymap.set("n", lhs, rhs, { buffer = event.buf, desc = desc })
+					end
 
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-					vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
-					vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
-					vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
-					vim.keymap.set({ "n", "x" }, "<F3>", function()
-						require("conform").format({ async = false, timeout_ms = 10000 })
-					end, opts)
+					map("gd", function()
+						Snacks.picker.lsp_definitions()
+					end, "Goto Definition")
+					map("gD", function()
+						Snacks.picker.lsp_declarations()
+					end, "Goto Declaration")
+					map("grr", function()
+						Snacks.picker.lsp_references()
+					end, "References")
+					map("gri", function()
+						Snacks.picker.lsp_implementations()
+					end, "Goto Implementation")
+					map("grt", function()
+						Snacks.picker.lsp_type_definitions()
+					end, "Goto Type Definition")
+					map("gO", function()
+						Snacks.picker.lsp_symbols()
+					end, "Document Symbols")
+					map("gs", vim.lsp.buf.signature_help, "Signature Help")
 				end,
 			})
 
