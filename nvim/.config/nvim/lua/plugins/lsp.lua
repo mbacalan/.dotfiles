@@ -45,7 +45,7 @@ return {
 			},
 			format_on_save = {
 				timeout_ms = 2000,
-				lsp_fallback = true,
+				lsp_format = "fallback",
 			},
 		},
 	},
@@ -70,10 +70,10 @@ return {
 				callback = function(event)
 					local opts = { buffer = event.buf }
 
-					vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-					vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-					vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-					vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+					vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
+					vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
 					vim.keymap.set({ "n", "x" }, "<F3>", function()
 						require("conform").format({ async = false, timeout_ms = 10000 })
 					end, opts)
