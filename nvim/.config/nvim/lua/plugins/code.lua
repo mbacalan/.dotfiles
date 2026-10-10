@@ -9,6 +9,7 @@ return {
 				function()
 					require("refactoring").select_refactor()
 				end,
+				desc = "Select Refactor",
 				mode = { "n", "x" },
 			},
 			{
@@ -16,12 +17,14 @@ return {
 				function()
 					require("refactoring.debug").print_loc()
 				end,
+				desc = "Debug Print Location",
 			},
 			{
 				"<leader>rv",
 				function()
 					require("refactoring.debug").print_var()
 				end,
+				desc = "Debug Print Variable",
 				mode = { "x", "n" },
 			},
 			{
@@ -29,6 +32,7 @@ return {
 				function()
 					require("refactoring.debug").cleanup()
 				end,
+				desc = "Debug Print Cleanup",
 			},
 		},
 	},

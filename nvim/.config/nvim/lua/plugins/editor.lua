@@ -12,6 +12,7 @@ return {
 				function()
 					require("harpoon"):list():add()
 				end,
+				desc = "Harpoon Add File",
 			},
 			{
 				"<C-e>",
@@ -19,6 +20,7 @@ return {
 					local harpoon = require("harpoon")
 					harpoon.ui:toggle_quick_menu(harpoon:list())
 				end,
+				desc = "Harpoon Menu",
 			},
 		},
 	},
@@ -36,6 +38,7 @@ return {
 					{ "<leader>f", group = "file/find" },
 					{ "<leader>g", group = "git" },
 					{ "<leader>gh", group = "hunks" },
+					{ "<leader>r", group = "refactor" },
 					{ "<leader>s", group = "search" },
 					{ "<leader>x", group = "diagnostics/quickfix" },
 					{ "[", group = "prev" },

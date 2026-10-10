@@ -20,6 +20,7 @@ return {
 					MiniFiles.open(path, true)
 				end,
 				silent = true,
+				desc = "File Explorer (mini.files)",
 			},
 		},
 		config = function()
@@ -47,7 +48,7 @@ return {
 				callback = function(args)
 					local buf_id = args.data.buf_id
 					-- Tweak left-hand side of mapping to your liking
-					vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id })
+					vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle Dotfiles" })
 				end,
 			})
 
