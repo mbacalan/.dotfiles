@@ -82,7 +82,10 @@ return {
 		},
 		config = function()
 			vim.diagnostic.config({
-				virtual_text = true,
+				-- Current line gets virtual_lines instead
+				virtual_text = {
+					current_line = false,
+				},
 				virtual_lines = {
 					current_line = true,
 				},
