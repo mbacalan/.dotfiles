@@ -1,6 +1,6 @@
 return {
 	{
-		"echasnovski/mini.files",
+		"nvim-mini/mini.files",
 		config = function()
 			require("mini.files").setup()
 
@@ -57,7 +57,7 @@ return {
 		end,
 	},
 	{
-		"echasnovski/mini.icons",
+		"nvim-mini/mini.icons",
 		lazy = true,
 		opts = {
 			file = {
@@ -76,14 +76,14 @@ return {
 		end,
 	},
 	{
-		"echasnovski/mini.pairs",
+		"nvim-mini/mini.pairs",
 		event = "VeryLazy",
 		opts = {
 			modes = { insert = true, command = true, terminal = false },
 		},
 	},
 	{
-		"echasnovski/mini.surround",
+		"nvim-mini/mini.surround",
 		event = "VeryLazy",
 		opts = {
 			-- gz prefix to avoid conflicts with gs (signature help) in LSP buffers

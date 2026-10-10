@@ -54,12 +54,12 @@ return {
 	-- LSP
 	{
 		"neovim/nvim-lspconfig",
-		cmd = { "LspInfo", "LspInstall", "LspStart" },
+		cmd = { "LspInfo", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			{ "saghen/blink.cmp" },
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
+			{ "mason-org/mason.nvim" },
+			{ "mason-org/mason-lspconfig.nvim" },
 		},
 		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {

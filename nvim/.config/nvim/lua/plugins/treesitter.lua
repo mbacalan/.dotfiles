@@ -49,7 +49,7 @@ return {
 			})
 		end,
 		dependencies = {
-			"romgrk/nvim-treesitter-context",
+			"nvim-treesitter/nvim-treesitter-context",
 			"nvim-treesitter/nvim-treesitter-textobjects", -- queries used by mini.ai
 			{
 				"windwp/nvim-ts-autotag",
