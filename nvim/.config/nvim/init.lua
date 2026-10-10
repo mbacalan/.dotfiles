@@ -14,7 +14,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 require("config.options")
 require("config.keymaps")
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+	install = { colorscheme = { "tokyonight" } },
+	change_detection = { notify = false },
+	rocks = { enabled = false },
+})
