@@ -11,6 +11,11 @@ vim.opt.updatetime = 300
 vim.opt.list = true
 vim.opt.termguicolors = true
 vim.opt.hlsearch = false
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.inccommand = "split"
+vim.opt.cursorline = true
+vim.opt.confirm = true
 vim.opt.wildmode = "longest,list,full"
 vim.opt.wildignore:append("**/node_modules/*")
 vim.opt.wildignore:append("**/.git/*")
